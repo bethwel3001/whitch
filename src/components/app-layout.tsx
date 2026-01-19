@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import {
   SidebarProvider,
   Sidebar,
@@ -11,9 +12,16 @@ import {
   SidebarInset,
   SidebarTrigger,
   SidebarFooter,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from './ui/avatar';
-import { Button } from './ui/button';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 import {
   Home,
   Settings,
@@ -22,21 +30,13 @@ import {
   Moon,
   Laptop,
   Bell,
+  ChevronRight,
 } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
+  const [isThemeOpen, setIsThemeOpen] = React.useState(false);
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -48,12 +48,66 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
           </div>
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="flex flex-col justify-between">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton isActive>
                 <Home />
                 Home
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+
+          <SidebarMenu>
+            <Collapsible open={isThemeOpen} onOpenChange={setIsThemeOpen}>
+              <SidebarMenuItem>
+                <CollapsibleTrigger className="w-full">
+                  <SidebarMenuButton>
+                    <Sun />
+                    <span>Theme</span>
+                    <ChevronRight
+                      className={cn(
+                        'ml-auto h-4 w-4 transition-transform',
+                        isThemeOpen && 'rotate-90'
+                      )}
+                    />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+              </SidebarMenuItem>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  <SidebarMenuSubItem>
+                    <SidebarMenuSubButton>
+                      <Sun className="mr-2" />
+                      <span>Light</span>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem>
+                    <SidebarMenuSubButton>
+                      <Moon className="mr-2" />
+                      <span>Dark</span>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem>
+                    <SidebarMenuSubButton>
+                      <Laptop className="mr-2" />
+                      <span>System</span>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </Collapsible>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Bell />
+                Notifications
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Settings />
+                <span>More Settings</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -69,47 +123,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 Log in to save history
               </span>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="ml-auto">
-                  <Settings />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>Settings</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                    <Sun className="mr-2" />
-                    <span>Theme</span>
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>
-                        <Sun className="mr-2" />
-                        <span>Light</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Moon className="mr-2" />
-                        <span>Dark</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Laptop className="mr-2" />
-                        <span>System</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-                <DropdownMenuItem>
-                  <Bell className="mr-2" />
-                  <span>Notifications</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="mr-2" />
-                  <span>More Settings</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
         </SidebarFooter>
       </Sidebar>
