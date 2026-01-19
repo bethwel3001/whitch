@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,7 @@ import {
   Zap,
   Wind,
   HelpCircle,
+  RefreshCw,
 } from 'lucide-react';
 import {
   Select,
@@ -42,22 +43,31 @@ export function Recommendations() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [chatMovie, setChatMovie] = useState<Movie | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const handleMoodSelect = async (mood: string) => {
     setIsLoading(true);
     setSelectedMood(mood);
     setRecommendations([]);
+    setError(null);
+
+    // Scroll down after a short delay to allow the loading spinner to render
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
     const result = await getRecommendationsForMood(mood, user.viewingHistory);
     if (result.success && result.movies) {
       setRecommendations(result.movies);
     } else {
+      const errorMessage = result.error || 'Could not get recommendations. Please try again later.';
+      setError(errorMessage);
       toast({
         variant: 'destructive',
         title: 'AI Error',
-        description:
-          result.error ||
-          'Could not get recommendations. Please try again later.',
+        description: errorMessage,
       });
     }
     setIsLoading(false);
@@ -72,7 +82,7 @@ export function Recommendations() {
   const handleChatClick = (movie: Movie) => {
     setChatMovie(movie);
   };
-  
+
   const closeChat = () => {
     setChatMovie(null);
   };
@@ -134,8 +144,11 @@ export function Recommendations() {
         </div>
       </div>
 
-      {(isLoading || recommendations.length > 0) && (
-        <section className="animate-in fade-in duration-500 space-y-6">
+      {(isLoading || recommendations.length > 0 || error) && (
+        <section
+          ref={resultsRef}
+          className="animate-in fade-in duration-500 space-y-6 scroll-mt-20"
+        >
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
             <h3 className="flex flex-shrink-0 items-center gap-2 text-2xl font-headline font-semibold">
               <Sparkles className="text-primary" />
@@ -160,8 +173,23 @@ export function Recommendations() {
           </div>
 
           {isLoading && <LoadingSpinner />}
+          
+          {!isLoading && error && (
+            <Card className="py-24 text-center">
+               <h3 className="text-xl font-semibold text-destructive">
+                Failed to Conjure Recommendations
+              </h3>
+              <p className="my-2 text-muted-foreground">
+                {error}
+              </p>
+              <Button onClick={() => selectedMood && handleMoodSelect(selectedMood)}>
+                <RefreshCw className="mr-2" />
+                Retry
+              </Button>
+            </Card>
+          )}
 
-          {!isLoading && displayedMovies.length > 0 && (
+          {!isLoading && !error && displayedMovies.length > 0 && (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {displayedMovies.map((movie, index) => (
                 <MovieCard
@@ -174,6 +202,7 @@ export function Recommendations() {
           )}
 
           {!isLoading &&
+            !error &&
             recommendations.length > 0 &&
             displayedMovies.length === 0 && (
               <Card className="py-24 text-center">
@@ -188,7 +217,7 @@ export function Recommendations() {
         </section>
       )}
 
-      {!isLoading && recommendations.length === 0 && (
+      {!isLoading && recommendations.length === 0 && !error && (
         <div className="animate-in fade-in duration-500 rounded-lg border-2 border-dashed border-muted py-24 text-center">
           <Wand2 className="mx-auto h-12 w-12 text-muted-foreground" />
           <h3 className="mt-4 text-xl font-semibold text-muted-foreground">
