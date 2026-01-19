@@ -10,7 +10,7 @@ export const streamingServices = [
 export const user = {
   name: 'Alex',
   viewingHistory:
-    'Loves science fiction movies with complex plots like Inception and Interstellar. Also enjoys quirky comedies like The Grand Budapest Hotel. Recently watched Blade Runner 2049 and enjoyed its visual style. Not a fan of horror or romantic comedies.',
+    'Loves science fiction movies with complex plots, quirky comedies, and enjoys strong visual styles. Not a fan of horror or romantic comedies.',
 };
 
 export type Movie = {

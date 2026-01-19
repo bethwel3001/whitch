@@ -3,7 +3,7 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'CineMatch',
+  title: 'w!tch',
   description: 'AI-powered personalized movie and show recommendations',
 };
 

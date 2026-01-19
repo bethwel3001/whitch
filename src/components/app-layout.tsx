@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
-import { Film, Home, Settings, Users } from 'lucide-react';
+import { Home, Settings, Users, Wand2 } from 'lucide-react';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,9 +23,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         <SidebarHeader>
           <div className="flex items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <Film className="h-6 w-6 text-primary-foreground" />
+              <Wand2 className="h-6 w-6 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-headline font-semibold">CineMatch</h1>
+            <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
           </div>
         </SidebarHeader>
         <SidebarContent>

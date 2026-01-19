@@ -4,39 +4,15 @@
  * @fileOverview Provides movie recommendations based on the user's mood.
  *
  * - getMoodBasedRecommendations - A function that returns movie recommendations based on the user's mood.
- * - MoodBasedRecommendationsInput - The input type for the getMoodBasedRecommendations function.
- * - MoodBasedRecommendationsOutput - The return type for the getMoodBasedRecommendations function.
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
-
-const MoodBasedRecommendationsInputSchema = z.object({
-  mood: z
-    .string()
-    .describe("The user's current mood (e.g., happy, sad, excited, relaxed)."),
-  pastViewingHistory: z
-    .string()
-    .describe("A summary of the user's past viewing history."),
-});
-export type MoodBasedRecommendationsInput = z.infer<
-  typeof MoodBasedRecommendationsInputSchema
->;
-
-const RecommendationSchema = z.object({
-  title: z.string().describe('The title of the movie or show.'),
-  year: z.number().optional().describe('The release year of the movie or show.'),
-  reason: z.string().describe('A brief explanation for the recommendation.'),
-});
-
-const MoodBasedRecommendationsOutputSchema = z.object({
-  recommendations: z
-    .array(RecommendationSchema)
-    .describe('A list of movie/show recommendations based on the mood.'),
-});
-export type MoodBasedRecommendationsOutput = z.infer<
-  typeof MoodBasedRecommendationsOutputSchema
->;
+import {
+  type MoodBasedRecommendationsInput,
+  MoodBasedRecommendationsInputSchema,
+  type MoodBasedRecommendationsOutput,
+  MoodBasedRecommendationsOutputSchema,
+} from './types';
 
 export async function getMoodBasedRecommendations(
   input: MoodBasedRecommendationsInput

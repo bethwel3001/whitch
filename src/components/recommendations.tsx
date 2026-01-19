@@ -9,7 +9,6 @@ import { getRecommendationsForMood } from '@/app/actions';
 import { type Movie, streamingServices, user } from '@/lib/placeholder-data';
 import { useToast } from '@/hooks/use-toast';
 import {
-  Loader2,
   Sparkles,
   Wand2,
   Smile,
@@ -26,6 +25,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card } from './ui/card';
+import { LoadingSpinner } from './loading-spinner';
+import { MovieChatDialog } from './movie-chat-dialog';
 
 const moods = [
   { name: 'Happy', icon: Smile },
@@ -40,6 +41,7 @@ export function Recommendations() {
   const [filteredServices, setFilteredServices] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const [chatMovie, setChatMovie] = useState<Movie | null>(null);
   const { toast } = useToast();
 
   const handleMoodSelect = async (mood: string) => {
@@ -65,6 +67,14 @@ export function Recommendations() {
     setFilteredServices(prev =>
       checked ? [...prev, service] : prev.filter(s => s !== service)
     );
+  };
+
+  const handleChatClick = (movie: Movie) => {
+    setChatMovie(movie);
+  };
+  
+  const closeChat = () => {
+    setChatMovie(null);
   };
 
   const displayedMovies = recommendations.filter(
@@ -149,19 +159,16 @@ export function Recommendations() {
             </div>
           </div>
 
-          {isLoading && (
-            <div className="flex flex-col items-center justify-center gap-4 p-24">
-              <Loader2 className="h-16 w-16 animate-spin text-primary" />
-              <p className="text-lg font-medium text-muted-foreground">
-                Our AI is finding your perfect match...
-              </p>
-            </div>
-          )}
+          {isLoading && <LoadingSpinner />}
 
           {!isLoading && displayedMovies.length > 0 && (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {displayedMovies.map((movie, index) => (
-                <MovieCard key={`${movie.title}-${index}`} movie={movie} />
+                <MovieCard
+                  key={`${movie.title}-${index}`}
+                  movie={movie}
+                  onChatClick={handleChatClick}
+                />
               ))}
             </div>
           )}
@@ -192,6 +199,11 @@ export function Recommendations() {
           </p>
         </div>
       )}
+      <MovieChatDialog
+        movie={chatMovie}
+        isOpen={!!chatMovie}
+        onClose={closeChat}
+      />
     </div>
   );
 }

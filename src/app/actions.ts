@@ -1,7 +1,9 @@
 'use server';
 
-import { getMoodBasedRecommendations } from '@/ai/flows/mood-based-recommendations';
-import { moviePool, type Movie } from '@/lib/placeholder-data';
+import {getMoodBasedRecommendations} from '@/ai/flows/mood-based-recommendations';
+import {movieChat} from '@/ai/flows/movie-chat-flow';
+import {type MovieChatInput} from '@/ai/flows/types';
+import {moviePool, type Movie} from '@/lib/placeholder-data';
 
 // Helper function to find a movie in the pool, ignoring case and some punctuation.
 const findMovieInPool = (title: string) => {
@@ -24,9 +26,9 @@ export async function getRecommendationsForMood(
       mood,
       pastViewingHistory,
     });
-    
+
     if (!result.recommendations || result.recommendations.length === 0) {
-      return { success: false, error: 'AI did not return any recommendations.' };
+      return {success: false, error: 'AI did not return any recommendations.'};
     }
 
     const recommendedMovies: Movie[] = result.recommendations
@@ -34,14 +36,14 @@ export async function getRecommendationsForMood(
         const foundMovie = findMovieInPool(rec.title);
 
         if (foundMovie) {
-          return { ...foundMovie, reason: rec.reason };
+          return {...foundMovie, reason: rec.reason};
         }
-        
+
         // If not found in our pool, create a generic entry
         return {
           title: rec.title,
           year: rec.year || new Date().getFullYear(),
-          description: 'A new recommendation from CineMatch AI.',
+          description: 'A new recommendation from w!tch AI.',
           posterUrl: `https://picsum.photos/seed/${rec.title
             .replace(/\s+/g, '')
             .toLowerCase()}/400/600`,
@@ -53,12 +55,25 @@ export async function getRecommendationsForMood(
       })
       .slice(0, 8); // Limit to 8 movies for display
 
-    return { success: true, movies: recommendedMovies };
+    return {success: true, movies: recommendedMovies};
   } catch (error) {
     console.error('Error getting recommendations:', error);
     return {
       success: false,
       error: 'Failed to get recommendations from AI. Please try again.',
+    };
+  }
+}
+
+export async function getMovieChatResponse(input: MovieChatInput) {
+  try {
+    const result = await movieChat(input);
+    return {success: true, response: result.response};
+  } catch (error) {
+    console.error('Error getting chat response:', error);
+    return {
+      success: false,
+      error: 'Failed to get chat response from AI. Please try again.',
     };
   }
 }
