@@ -61,7 +61,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <SidebarMenu>
             <Collapsible open={isThemeOpen} onOpenChange={setIsThemeOpen}>
               <SidebarMenuItem>
-                <CollapsibleTrigger className="w-full">
+                <CollapsibleTrigger asChild className="w-full">
                   <SidebarMenuButton>
                     <Sun />
                     <span>Theme</span>
