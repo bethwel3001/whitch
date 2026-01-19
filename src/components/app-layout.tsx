@@ -35,9 +35,19 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const [isThemeOpen, setIsThemeOpen] = React.useState(false);
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = React.useState(false);
 
   const handleThemeChange = (theme: 'light' | 'dark' | 'system') => {
     localStorage.setItem('witch-theme', theme);
@@ -160,6 +170,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           <Button
             variant="outline"
             className="h-auto w-full justify-start p-2 text-left"
+            onClick={() => setIsAuthDialogOpen(true)}
           >
             <div className="flex w-full items-center gap-3">
               <Avatar>
@@ -177,12 +188,29 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b bg-background/80 p-4 backdrop-blur-sm md:justify-end">
-          <SidebarTrigger className="md:hidden" />
-          {/* Header content like search or notifications can go here */}
+        <header className="sticky top-0 z-10 flex h-16 items-center justify-start border-b bg-background/80 p-4 backdrop-blur-sm">
+          <SidebarTrigger />
         </header>
         {children}
       </SidebarInset>
+
+      <AlertDialog open={isAuthDialogOpen} onOpenChange={setIsAuthDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Authentication</AlertDialogTitle>
+            <AlertDialogDescription>
+              User authentication is coming soon! This feature will allow you to
+              save your viewing history and get even more personalized
+              recommendations.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setIsAuthDialogOpen(false)}>
+              Got it!
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </SidebarProvider>
   );
 }
