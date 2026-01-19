@@ -7,15 +7,22 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { type Movie } from '@/lib/placeholder-data';
+import { moviePool, type Movie } from '@/lib/placeholder-data';
+import { Buffer } from 'buffer';
 
 export function MovieCard({ movie }: { movie: Movie }) {
+  const isFromPool = moviePool.some(poolMovie => poolMovie.slug === movie.slug);
+
+  let href = `/movie/${movie.slug}`;
+
+  if (!isFromPool) {
+    const movieData = Buffer.from(JSON.stringify(movie)).toString('base64');
+    href = `/movie/${movie.slug}?data=${movieData}`;
+  }
+
   return (
-    <Link
-      href={`/movie/${movie.slug}`}
-      className="group block h-full outline-none"
-    >
-      <Card className="flex h-full flex-col overflow-hidden border-2 border-card shadow-lg ring-primary ring-offset-2 ring-offset-background transition-all duration-300 group-hover:shadow-primary/20 group-focus-visible:ring-2">
+    <Link href={href} className="group block h-full outline-none">
+      <Card className="flex h-full flex-col overflow-hidden border border-border/20 bg-card shadow-md transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/10 group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
         <CardHeader className="relative p-0">
           <Image
             src={movie.posterUrl}
@@ -39,7 +46,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
           <p className="text-sm text-muted-foreground">{movie.description}</p>
           {movie.reason && (
             <p className="border-l-2 border-primary pl-3 text-sm italic text-accent-foreground/80">
-              {movie.reason}
+              "{movie.reason}"
             </p>
           )}
         </CardContent>

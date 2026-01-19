@@ -39,9 +39,15 @@ export async function getRecommendationsForMood(
           return {...foundMovie, reason: rec.reason};
         }
 
+        const slug = rec.title
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-');
+
         // If not found in our pool, create a generic entry
         return {
           title: rec.title,
+          slug: slug,
           year: rec.year || new Date().getFullYear(),
           description: 'A new recommendation from w!tch AI.',
           posterUrl: `https://picsum.photos/seed/${rec.title

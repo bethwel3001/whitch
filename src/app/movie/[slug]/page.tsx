@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Buffer } from 'buffer';
 
 function findMovieBySlug(slug: string): Movie | undefined {
   return moviePool.find(movie => movie.slug === slug);
@@ -21,10 +22,25 @@ export async function generateStaticParams() {
 
 export default function MovieDetailsPage({
   params,
+  searchParams,
 }: {
   params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const movie = findMovieBySlug(params.slug);
+  let movie: Movie | undefined = findMovieBySlug(params.slug);
+
+  if (!movie && searchParams?.data) {
+    try {
+      const movieData = Buffer.from(
+        searchParams.data as string,
+        'base64'
+      ).toString('utf-8');
+      movie = JSON.parse(movieData);
+    } catch (e) {
+      console.error('Failed to parse movie data from search params', e);
+      // Let it fall through to notFound()
+    }
+  }
 
   if (!movie) {
     notFound();
@@ -58,7 +74,7 @@ export default function MovieDetailsPage({
                 </h1>
                 <p className="text-md text-muted-foreground">{movie.year}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {movie.services.map(service => (
+                  {(movie.services || []).map(service => (
                     <Badge key={service} variant="secondary">
                       {service}
                     </Badge>
