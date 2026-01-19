@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -27,7 +27,6 @@ import {
 } from '@/components/ui/select';
 import { Card } from './ui/card';
 import { LoadingSpinner } from './loading-spinner';
-import { MovieChatDialog } from './movie-chat-dialog';
 
 const moods = [
   { name: 'Happy', icon: Smile },
@@ -42,7 +41,6 @@ export function Recommendations() {
   const [filteredServices, setFilteredServices] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
-  const [chatMovie, setChatMovie] = useState<Movie | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -79,14 +77,6 @@ export function Recommendations() {
     setFilteredServices(prev =>
       checked ? [...prev, service] : prev.filter(s => s !== service)
     );
-  };
-
-  const handleChatClick = (movie: Movie) => {
-    setChatMovie(movie);
-  };
-
-  const closeChat = () => {
-    setChatMovie(null);
   };
 
   const displayedMovies = recommendations.filter(
@@ -197,7 +187,6 @@ export function Recommendations() {
                 <MovieCard
                   key={`${movie.title}-${index}`}
                   movie={movie}
-                  onChatClick={handleChatClick}
                 />
               ))}
             </div>
@@ -230,11 +219,6 @@ export function Recommendations() {
           </p>
         </div>
       )}
-      <MovieChatDialog
-        movie={chatMovie}
-        isOpen={!!chatMovie}
-        onClose={closeChat}
-      />
     </div>
   );
 }
