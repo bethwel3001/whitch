@@ -7,12 +7,6 @@ export const streamingServices = [
   'Apple TV+',
 ];
 
-export const user = {
-  name: 'Alex',
-  viewingHistory:
-    'Loves science fiction movies with complex plots, quirky comedies, and enjoys strong visual styles. Not a fan of horror or romantic comedies.',
-};
-
 export type Movie = {
   title: string;
   year: number;

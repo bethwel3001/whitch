@@ -33,9 +33,7 @@ Your personality is witty, insightful, and you love sharing fun facts and behind
 
 Answer questions about the movie's plot, characters, actors (including other movies they've been in), plot twists, fun facts, etc.`;
 
-    const genkitHistory = history.map(m =>
-      new Message(m.role, m.parts.map(p => p.text))
-    );
+    const genkitHistory = history.map(m => new Message(m.role, m.parts));
     const latestUserMessage = genkitHistory.pop();
 
     if (!latestUserMessage || latestUserMessage.role !== 'user') {

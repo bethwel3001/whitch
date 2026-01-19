@@ -12,9 +12,29 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from '@/components/ui/sidebar';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Avatar, AvatarFallback } from './ui/avatar';
 import { Button } from './ui/button';
-import { Home, Settings, Users, Wand2 } from 'lucide-react';
+import {
+  Home,
+  Settings,
+  Wand2,
+  Sun,
+  Moon,
+  Laptop,
+  Bell,
+} from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,27 +56,60 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 Home
               </SidebarMenuButton>
             </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Users />
-                Friends
-              </SidebarMenuButton>
-            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
           <div className="flex items-center gap-3">
             <Avatar>
-              <AvatarImage src="https://picsum.photos/seed/user/40/40" />
-              <AvatarFallback>A</AvatarFallback>
+              <AvatarFallback>G</AvatarFallback>
             </Avatar>
             <div className="flex flex-col overflow-hidden">
-                <span className="truncate font-semibold text-sm">Alex</span>
-                <span className="truncate text-xs text-muted-foreground">alex@example.com</span>
+              <span className="truncate font-semibold text-sm">Guest</span>
+              <span className="truncate text-xs text-muted-foreground">
+                Log in to save history
+              </span>
             </div>
-            <Button variant="ghost" size="icon" className="ml-auto">
-                <Settings />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="ml-auto">
+                  <Settings />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>Settings</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <Sun className="mr-2" />
+                    <span>Theme</span>
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <Sun className="mr-2" />
+                        <span>Light</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Moon className="mr-2" />
+                        <span>Dark</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Laptop className="mr-2" />
+                        <span>System</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+                <DropdownMenuItem>
+                  <Bell className="mr-2" />
+                  <span>Notifications</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings className="mr-2" />
+                  <span>More Settings</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </SidebarFooter>
       </Sidebar>

@@ -6,7 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { MovieCard } from './movie-card';
 import { getRecommendationsForMood } from '@/app/actions';
-import { type Movie, streamingServices, user } from '@/lib/placeholder-data';
+import { type Movie, streamingServices } from '@/lib/placeholder-data';
 import { useToast } from '@/hooks/use-toast';
 import {
   Sparkles,
@@ -58,7 +58,9 @@ export function Recommendations() {
       resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
 
-    const result = await getRecommendationsForMood(mood, user.viewingHistory);
+    const viewingHistory = 'Loves science fiction movies with complex plots, quirky comedies, and enjoys strong visual styles. Not a fan of horror or romantic comedies.';
+    const result = await getRecommendationsForMood(mood, viewingHistory);
+
     if (result.success && result.movies) {
       setRecommendations(result.movies);
     } else {
@@ -97,7 +99,7 @@ export function Recommendations() {
     <div className="space-y-8">
       <div className="space-y-4 text-center">
         <h2 className="text-3xl font-headline font-bold sm:text-4xl">
-          How are you feeling, <span className="text-primary">{user.name}</span>?
+          How are you feeling today?
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           Select a mood and our AI will conjure a list of movies and shows
