@@ -8,15 +8,31 @@ import { MovieCard } from './movie-card';
 import { getRecommendationsForMood } from '@/app/actions';
 import { type Movie, streamingServices, user } from '@/lib/placeholder-data';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Sparkles, Wand2 } from 'lucide-react';
-import { Card, CardContent } from './ui/card';
+import {
+  Loader2,
+  Sparkles,
+  Wand2,
+  Smile,
+  Frown,
+  Zap,
+  Wind,
+  HelpCircle,
+} from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card } from './ui/card';
 
 const moods = [
-  { name: 'Happy', emoji: '😄' },
-  { name: 'Sad', emoji: '😢' },
-  { name: 'Thrilled', emoji: '😱' },
-  { name: 'Relaxed', emoji: '😌' },
-  { name: 'Curious', emoji: '🤔' },
+  { name: 'Happy', icon: Smile },
+  { name: 'Sad', icon: Frown },
+  { name: 'Thrilled', icon: Zap },
+  { name: 'Relaxed', icon: Wind },
+  { name: 'Curious', icon: HelpCircle },
 ];
 
 export function Recommendations() {
@@ -59,41 +75,64 @@ export function Recommendations() {
 
   return (
     <div className="space-y-8">
-      <Card className="bg-secondary/50 border-dashed">
-        <CardContent className="p-6 text-center space-y-4">
-          <h2 className="text-3xl font-headline font-bold text-primary">
-            How are you feeling, {user.name}?
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Select a mood and our AI will conjure a list of movies and shows
-            perfectly matched to your vibe.
-          </p>
-          <div className="flex justify-center items-center flex-wrap gap-3 pt-4">
-            {moods.map(mood => (
-              <Button
-                key={mood.name}
-                variant={selectedMood === mood.name ? 'default' : 'secondary'}
-                size="lg"
-                className="transform transition-transform hover:scale-105"
-                onClick={() => handleMoodSelect(mood.name)}
-                disabled={isLoading}
-              >
-                <span className="text-2xl mr-2">{mood.emoji}</span> {mood.name}
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="space-y-4 text-center">
+        <h2 className="text-3xl font-headline font-bold sm:text-4xl">
+          How are you feeling, <span className="text-primary">{user.name}</span>?
+        </h2>
+        <p className="mx-auto max-w-2xl text-muted-foreground">
+          Select a mood and our AI will conjure a list of movies and shows
+          perfectly matched to your vibe.
+        </p>
+
+        {/* Mood selector for mobile */}
+        <div className="pt-2 md:hidden">
+          <Select
+            onValueChange={handleMoodSelect}
+            disabled={isLoading}
+            value={selectedMood ?? ''}
+          >
+            <SelectTrigger className="w-full py-5 text-base">
+              <SelectValue placeholder="Select a mood..." />
+            </SelectTrigger>
+            <SelectContent>
+              {moods.map(mood => (
+                <SelectItem key={mood.name} value={mood.name}>
+                  <div className="flex items-center gap-2">
+                    <mood.icon className="h-5 w-5" />
+                    <span>{mood.name}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Mood selector for desktop */}
+        <div className="hidden items-center justify-center pt-4 md:flex flex-wrap gap-3">
+          {moods.map(mood => (
+            <Button
+              key={mood.name}
+              variant={selectedMood === mood.name ? 'default' : 'outline'}
+              size="lg"
+              className="transition-transform hover:scale-105"
+              onClick={() => handleMoodSelect(mood.name)}
+              disabled={isLoading}
+            >
+              <mood.icon className="mr-2 h-5 w-5" /> {mood.name}
+            </Button>
+          ))}
+        </div>
+      </div>
 
       {(isLoading || recommendations.length > 0) && (
-        <section className="space-y-6 animate-in fade-in duration-500">
-          <div className="flex flex-col md:flex-row gap-4 md:items-center">
-            <h3 className="text-2xl font-headline font-semibold flex-shrink-0 flex items-center gap-2">
+        <section className="animate-in fade-in duration-500 space-y-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center">
+            <h3 className="flex flex-shrink-0 items-center gap-2 text-2xl font-headline font-semibold">
               <Sparkles className="text-primary" />
               {selectedMood && `For your ${selectedMood.toLowerCase()} mood...`}
             </h3>
-            <div className="flex-1 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg bg-card p-3 border">
-              <span className="font-semibold text-sm">Filter by Service:</span>
+            <div className="flex-1 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border bg-card p-3">
+              <span className="text-sm font-semibold">Filter by Service:</span>
               {streamingServices.map(service => (
                 <div key={service} className="flex items-center space-x-2">
                   <Checkbox
@@ -111,37 +150,39 @@ export function Recommendations() {
           </div>
 
           {isLoading && (
-            <div className="flex justify-center items-center p-24 flex-col gap-4">
+            <div className="flex flex-col items-center justify-center gap-4 p-24">
               <Loader2 className="h-16 w-16 animate-spin text-primary" />
-              <p className="text-muted-foreground font-medium text-lg">
+              <p className="text-lg font-medium text-muted-foreground">
                 Our AI is finding your perfect match...
               </p>
             </div>
           )}
 
           {!isLoading && displayedMovies.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {displayedMovies.map(movie => (
-                <MovieCard key={movie.title} movie={movie} />
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {displayedMovies.map((movie, index) => (
+                <MovieCard key={`${movie.title}-${index}`} movie={movie} />
               ))}
             </div>
           )}
 
-          {!isLoading && recommendations.length > 0 && displayedMovies.length === 0 && (
-            <div className="text-center py-24 rounded-lg bg-card border">
-              <h3 className="text-xl font-semibold text-muted-foreground">
-                No Results Found
-              </h3>
-              <p className="text-muted-foreground">
-                Try adjusting your streaming service filters.
-              </p>
-            </div>
-          )}
+          {!isLoading &&
+            recommendations.length > 0 &&
+            displayedMovies.length === 0 && (
+              <Card className="py-24 text-center">
+                <h3 className="text-xl font-semibold text-muted-foreground">
+                  No Results Found
+                </h3>
+                <p className="text-muted-foreground">
+                  Try adjusting your streaming service filters.
+                </p>
+              </Card>
+            )}
         </section>
       )}
 
       {!isLoading && recommendations.length === 0 && (
-        <div className="text-center py-24 border-2 border-dashed border-muted rounded-lg animate-in fade-in duration-500">
+        <div className="animate-in fade-in duration-500 rounded-lg border-2 border-dashed border-muted py-24 text-center">
           <Wand2 className="mx-auto h-12 w-12 text-muted-foreground" />
           <h3 className="mt-4 text-xl font-semibold text-muted-foreground">
             Your movie journey starts here

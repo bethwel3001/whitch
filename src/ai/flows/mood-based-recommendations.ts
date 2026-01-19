@@ -23,9 +23,15 @@ export type MoodBasedRecommendationsInput = z.infer<
   typeof MoodBasedRecommendationsInputSchema
 >;
 
+const RecommendationSchema = z.object({
+  title: z.string().describe('The title of the movie or show.'),
+  year: z.number().optional().describe('The release year of the movie or show.'),
+  reason: z.string().describe('A brief explanation for the recommendation.'),
+});
+
 const MoodBasedRecommendationsOutputSchema = z.object({
   recommendations: z
-    .string()
+    .array(RecommendationSchema)
     .describe('A list of movie/show recommendations based on the mood.'),
 });
 export type MoodBasedRecommendationsOutput = z.infer<
@@ -42,7 +48,7 @@ const moodBasedRecommendationsPrompt = ai.definePrompt({
   name: 'moodBasedRecommendationsPrompt',
   input: {schema: MoodBasedRecommendationsInputSchema},
   output: {schema: MoodBasedRecommendationsOutputSchema},
-  prompt: `You are a movie recommendation expert. Given a user's current mood and past viewing history, you will provide a list of movie or show recommendations.
+  prompt: `You are a movie recommendation expert. Given a user's current mood and past viewing history, you will provide a list of movie or show recommendations. Provide a title, year, and a brief reason for each recommendation.
 
 Mood: {{{mood}}}
 Past Viewing History: {{{pastViewingHistory}}}
