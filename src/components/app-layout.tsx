@@ -15,6 +15,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
@@ -44,6 +45,23 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+
+function AppHeader() {
+  const { state } = useSidebar();
+  return (
+    <header className="sticky top-0 z-10 flex h-16 items-center justify-start gap-4 border-b bg-background/80 p-4 backdrop-blur-sm">
+      <SidebarTrigger />
+      {state === 'collapsed' && (
+        <div className="flex items-center gap-2 animate-in fade-in duration-300">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+            <Wand2 className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <h1 className="text-xl font-headline font-semibold">w!tch</h1>
+        </div>
+      )}
+    </header>
+  );
+}
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const [isThemeOpen, setIsThemeOpen] = React.useState(false);
@@ -188,9 +206,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-16 items-center justify-start border-b bg-background/80 p-4 backdrop-blur-sm">
-          <SidebarTrigger />
-        </header>
+        <AppHeader />
         {children}
       </SidebarInset>
 
