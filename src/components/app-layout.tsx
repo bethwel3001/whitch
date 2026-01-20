@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import {
   SidebarProvider,
   Sidebar,
@@ -52,12 +53,15 @@ function AppHeader() {
     <header className="sticky top-0 z-10 flex h-16 items-center justify-start gap-4 border-b bg-background/80 p-4 backdrop-blur-sm">
       <SidebarTrigger />
       {state === 'collapsed' && (
-        <div className="flex items-center gap-2 animate-in fade-in duration-300">
+        <Link
+          href="/"
+          className="flex items-center gap-2 animate-in fade-in duration-300 no-underline text-foreground"
+        >
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <Wand2 className="h-5 w-5 text-primary-foreground" />
           </div>
           <h1 className="text-xl font-headline font-semibold">w!tch</h1>
-        </div>
+        </Link>
       )}
     </header>
   );
@@ -107,12 +111,15 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="flex items-center gap-2 no-underline text-foreground"
+          >
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
               <Wand2 className="h-6 w-6 text-primary-foreground" />
             </div>
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-          </div>
+          </Link>
         </SidebarHeader>
         <SidebarContent className="flex flex-col justify-between">
           <SidebarMenu>
