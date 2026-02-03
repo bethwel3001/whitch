@@ -49,19 +49,16 @@ import {
 import { IoHardwareChip } from 'react-icons/io5';
 
 function PageHeader() {
-  const { state } = useSidebar();
   return (
     <div className="flex h-auto items-center gap-4">
       <SidebarTrigger />
-      {state === 'collapsed' && (
-        <Link
-          href="/"
-          className="flex animate-in fade-in duration-300 items-center gap-2 text-foreground no-underline"
-        >
-          <IoHardwareChip className="h-8 w-8 text-primary" />
-          <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-        </Link>
-      )}
+      <Link
+        href="/"
+        className="flex items-center gap-2 text-foreground no-underline"
+      >
+        <IoHardwareChip className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
+      </Link>
     </div>
   );
 }
@@ -110,15 +107,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-foreground no-underline"
-          >
-            <IoHardwareChip className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-          </Link>
+          <div className="h-10" />
         </SidebarHeader>
-        <SidebarContent className="flex flex-col justify-between overflow-x-hidden">
+        <SidebarContent className="flex flex-col justify-between overflow-y-auto overflow-x-hidden">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton isActive>
@@ -149,6 +140,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton
                       onClick={() => handleThemeChange('light')}
+                      className="cursor-pointer"
                     >
                       <Sun className="mr-2" />
                       <span>Light</span>
@@ -157,6 +149,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton
                       onClick={() => handleThemeChange('dark')}
+                      className="cursor-pointer"
                     >
                       <Moon className="mr-2" />
                       <span>Dark</span>
@@ -165,6 +158,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton
                       onClick={() => handleThemeChange('system')}
+                      className="cursor-pointer"
                     >
                       <Laptop className="mr-2" />
                       <span>System</span>
