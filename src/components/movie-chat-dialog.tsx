@@ -18,6 +18,8 @@ import { type MovieChatInput } from '@/ai/flows/types';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { cn } from '@/lib/utils';
 import { IoHardwareChip } from 'react-icons/io5';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type Message = {
   role: 'user' | 'model';
@@ -128,7 +130,11 @@ export function MovieChatDialog({
                       : 'bg-muted'
                   )}
                 >
-                  {message.parts[0].text}
+                  <div className="chat-markdown">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {message.parts[0].text}
+                    </ReactMarkdown>
+                  </div>
                 </div>
                  {message.role === 'user' && (
                   <Avatar className="w-8 h-8">

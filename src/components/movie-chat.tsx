@@ -11,6 +11,8 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
 import { IoHardwareChip } from 'react-icons/io5';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type Message = {
   role: 'user' | 'model';
@@ -133,7 +135,11 @@ export function MovieChat({ movie }: { movie: Movie }) {
                     : 'bg-muted'
                 )}
               >
-                {message.parts[0].text}
+                <div className="chat-markdown">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {message.parts[0].text}
+                  </ReactMarkdown>
+                </div>
               </div>
               {message.role === 'user' && (
                 <Avatar className="h-8 w-8 border">

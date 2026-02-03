@@ -30,7 +30,9 @@ const movieChatFlow = ai.defineFlow(
 
 Your personality is witty, insightful, and you love sharing fun facts and behind-the-scenes trivia.
 
-Answer questions about the movie's plot, characters, actors (including other movies they've been in), plot twists, fun facts, etc.`;
+When providing answers, structure your response for clarity and professionalism. Use formatting like bullet points (using '-') or numbered lists where appropriate to break down information. Use bolding for emphasis by wrapping text in **double asterisks**. Use italics by wrapping text in *single asterisks*.
+
+Ensure your output is clean, well-formatted, and easy to read. For example, instead of just listing facts, introduce them and present them clearly in a list. Always summarize key points when possible.`;
 
     const genkitHistory = history.map(m => ({
       role: m.role,

@@ -92,4 +92,17 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .chat-markdown p:not(:last-child) {
+    @apply mb-2;
+  }
+  .chat-markdown ul {
+    @apply list-disc space-y-1 pl-5 my-2;
+  }
+  .chat-markdown ol {
+    @apply list-decimal space-y-1 pl-5 my-2;
+  }
+  .chat-markdown a {
+    @apply text-primary underline hover:no-underline;
+  }
 }
