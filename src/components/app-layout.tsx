@@ -11,7 +11,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarInset,
-  SidebarTrigger,
   SidebarFooter,
   SidebarMenuSub,
   SidebarMenuSubItem,
@@ -48,6 +47,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { IoHardwareChip } from 'react-icons/io5';
 import { RecommendationsProvider } from '@/context/recommendations-context';
+import { GoSidebarCollapse, GoSidebarExpand } from 'react-icons/go';
 
 function Header() {
   const { state, toggleSidebar, isMobile } = useSidebar();
@@ -58,6 +58,21 @@ function Header() {
   return (
     <header className="flex h-14 items-center border-b bg-background px-4">
       <div className="flex items-center gap-4">
+        {/* Desktop sidebar toggle */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="hidden h-8 w-8 md:flex"
+          onClick={toggleSidebar}
+          aria-label="Toggle Sidebar"
+        >
+          {state === 'expanded' ? (
+            <GoSidebarExpand className="h-5 w-5" />
+          ) : (
+            <GoSidebarCollapse className="h-5 w-5" />
+          )}
+        </Button>
+
         {/* Mobile-only hamburger trigger */}
         <Button
           variant="ghost"
@@ -130,7 +145,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <RecommendationsProvider>
         <Sidebar>
           <SidebarHeader>
-            <div className="flex w-full items-center justify-between p-2">
+            <div className="flex w-full items-center p-2">
               <Link
                 href="/"
                 className="flex items-center gap-2 text-foreground no-underline"
@@ -142,7 +157,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   </h1>
                 </div>
               </Link>
-              <SidebarTrigger className="hidden md:flex" />
             </div>
           </SidebarHeader>
           <SidebarContent className="flex flex-col justify-between overflow-x-hidden">
