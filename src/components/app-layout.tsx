@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -49,16 +48,19 @@ import {
 import { IoHardwareChip } from 'react-icons/io5';
 
 function PageHeader() {
+  const { state } = useSidebar();
   return (
     <div className="flex h-auto items-center gap-4">
       <SidebarTrigger />
-      <Link
-        href="/"
-        className="flex items-center gap-2 text-foreground no-underline"
-      >
-        <IoHardwareChip className="h-8 w-8 text-primary" />
-        <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-      </Link>
+      {state === 'collapsed' && (
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-foreground no-underline"
+        >
+          <IoHardwareChip className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
+        </Link>
+      )}
     </div>
   );
 }
@@ -107,7 +109,15 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="h-10" />
+          <Link
+            href="/"
+            className="flex items-center gap-2 p-2 text-foreground no-underline"
+          >
+            <IoHardwareChip className="h-8 w-8 text-primary" />
+            <div className="duration-200 group-data-[collapsible=icon]:-ml-8 group-data-[collapsible=icon]:opacity-0">
+              <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
+            </div>
+          </Link>
         </SidebarHeader>
         <SidebarContent className="flex flex-col justify-between overflow-y-auto overflow-x-hidden">
           <SidebarMenu>
@@ -204,7 +214,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <div className="px-4 pt-6 md:px-6 md:pt-8">
+        <div className="space-y-6 px-4 pt-6 md:px-6 md:pt-8">
           <PageHeader />
           {children}
         </div>
