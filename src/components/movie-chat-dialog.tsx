@@ -17,6 +17,7 @@ import { Send, User, Loader2 } from 'lucide-react';
 import { type MovieChatInput } from '@/ai/flows/types';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { cn } from '@/lib/utils';
+import { IoHardwareChip } from 'react-icons/io5';
 
 type Message = {
   role: 'user' | 'model';
@@ -117,7 +118,7 @@ export function MovieChatDialog({
                 )}
               >
                 {message.role === 'model' && (
-                  <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
+                  <IoHardwareChip className="h-8 w-8 flex-shrink-0 text-primary" />
                 )}
                 <div
                   className={cn(
@@ -140,7 +141,7 @@ export function MovieChatDialog({
             ))}
             {isLoading && (
               <div className="flex items-start gap-3 justify-start">
-                 <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
+                 <IoHardwareChip className="h-8 w-8 flex-shrink-0 text-primary" />
                 <div className="bg-muted rounded-lg p-3">
                    <Loader2 className="h-5 w-5 animate-spin" />
                 </div>

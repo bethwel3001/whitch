@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { ScrollArea } from './ui/scroll-area';
+import { IoHardwareChip } from 'react-icons/io5';
 
 type Message = {
   role: 'user' | 'model';
@@ -104,14 +105,11 @@ export function MovieChat({ movie }: { movie: Movie }) {
 
   return (
     <div className="flex h-[80vh] w-full flex-col rounded-lg border bg-card shadow">
-      <div className="flex items-center gap-3 border-b p-4">
-        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-primary" />
-        <div>
-          <h3 className="text-lg font-semibold">Chat with w!tch</h3>
-          <p className="text-sm text-muted-foreground">
-            Your AI movie expert
-          </p>
-        </div>
+      <div className="border-b p-4">
+        <h3 className="text-lg font-semibold">Chat with w!tch</h3>
+        <p className="text-sm text-muted-foreground">
+          Your AI movie expert
+        </p>
       </div>
 
       <ScrollArea className="flex-grow p-4" ref={scrollAreaRef}>
@@ -125,7 +123,7 @@ export function MovieChat({ movie }: { movie: Movie }) {
               )}
             >
               {message.role === 'model' && (
-                 <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
+                 <IoHardwareChip className="h-8 w-8 flex-shrink-0 text-primary" />
               )}
               <div
                 className={cn(
@@ -148,7 +146,7 @@ export function MovieChat({ movie }: { movie: Movie }) {
           ))}
           {isLoading && (
             <div className="flex items-start gap-3 justify-start">
-               <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
+               <IoHardwareChip className="h-8 w-8 flex-shrink-0 text-primary" />
               <div className="bg-muted rounded-lg p-3">
                 <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
               </div>

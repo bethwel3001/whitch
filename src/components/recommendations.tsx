@@ -10,7 +10,6 @@ import { type Movie, streamingServices } from '@/lib/placeholder-data';
 import { useToast } from '@/hooks/use-toast';
 import {
   Sparkles,
-  Wand2,
   Smile,
   Frown,
   Zap,
@@ -210,8 +209,7 @@ export function Recommendations() {
 
       {!isLoading && recommendations.length === 0 && !error && (
         <div className="animate-in fade-in duration-500 rounded-lg border-2 border-dashed border-muted py-24 text-center">
-          <Wand2 className="mx-auto h-12 w-12 text-muted-foreground" />
-          <h3 className="mt-4 text-xl font-semibold text-muted-foreground">
+          <h3 className="text-xl font-semibold text-muted-foreground">
             Your movie journey starts here
           </h3>
           <p className="mt-1 text-muted-foreground">
