@@ -47,10 +47,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { IoHardwareChip } from 'react-icons/io5';
 
-function AppHeaderContent() {
+function PageHeader() {
   const { state } = useSidebar();
   return (
-    <div className="absolute left-4 top-4 z-10 flex items-center gap-4">
+    <div className="flex h-auto items-center gap-4 px-4 pt-6 md:px-6 md:pt-8">
       <SidebarTrigger />
       {state === 'collapsed' && (
         <Link
@@ -58,6 +58,7 @@ function AppHeaderContent() {
           className="flex animate-in fade-in duration-300 items-center gap-2 text-foreground no-underline"
         >
           <IoHardwareChip className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
         </Link>
       )}
     </div>
@@ -208,8 +209,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <AppHeaderContent />
-        {children}
+        <PageHeader />
+        <div className="px-4 pb-4 md:px-6 md:pb-8">{children}</div>
       </SidebarInset>
 
       <AlertDialog open={isAuthDialogOpen} onOpenChange={setIsAuthDialogOpen}>

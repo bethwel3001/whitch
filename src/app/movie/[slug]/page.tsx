@@ -46,7 +46,7 @@ export default function MovieDetailsPage({
   }
 
   return (
-    <main className="p-4 md:p-8">
+    <div>
       <div className="mb-8">
         <Button asChild variant="outline" size="sm">
           <Link href="/">
@@ -97,6 +97,6 @@ export default function MovieDetailsPage({
           <MovieChat movie={movie} />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
