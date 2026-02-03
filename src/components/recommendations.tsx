@@ -17,13 +17,6 @@ import {
   HelpCircle,
   RefreshCw,
 } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Card } from './ui/card';
 import { LoadingSpinner } from './loading-spinner';
 
@@ -85,7 +78,7 @@ export function Recommendations() {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="mt-8 space-y-8 md:mt-12">
       <div className="space-y-4 text-center">
         <h2 className="text-3xl font-headline font-bold sm:text-4xl">
           How are you feeling today?
@@ -95,31 +88,8 @@ export function Recommendations() {
           perfectly matched to your vibe.
         </p>
 
-        {/* Mood selector for mobile */}
-        <div className="pt-2 md:hidden">
-          <Select
-            onValueChange={handleMoodSelect}
-            disabled={isLoading}
-            value={selectedMood ?? ''}
-          >
-            <SelectTrigger className="w-full py-5 text-base">
-              <SelectValue placeholder="Select a mood..." />
-            </SelectTrigger>
-            <SelectContent>
-              {moods.map(mood => (
-                <SelectItem key={mood.name} value={mood.name}>
-                  <div className="flex items-center gap-2">
-                    <mood.icon className="h-5 w-5" />
-                    <span>{mood.name}</span>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Mood selector for desktop */}
-        <div className="hidden items-center justify-center pt-4 md:flex flex-wrap gap-3">
+        {/* Unified mood selector for all screens */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
           {moods.map(mood => (
             <Button
               key={mood.name}
