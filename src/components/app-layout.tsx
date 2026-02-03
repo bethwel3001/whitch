@@ -16,7 +16,6 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
-  useSidebar,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
@@ -49,19 +48,16 @@ import { IoHardwareChip } from 'react-icons/io5';
 import { RecommendationsProvider } from '@/context/recommendations-context';
 
 function PageHeader() {
-  const { state } = useSidebar();
   return (
     <div className="flex h-auto items-center gap-4">
       <SidebarTrigger />
-      {state === 'collapsed' && (
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-foreground no-underline"
-        >
-          <IoHardwareChip className="h-8 w-8 text-primary" />
-          <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-        </Link>
-      )}
+      <Link
+        href="/"
+        className="flex items-center gap-2 text-foreground no-underline"
+      >
+        <IoHardwareChip className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
+      </Link>
     </div>
   );
 }
