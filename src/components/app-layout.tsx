@@ -60,7 +60,7 @@ function Header() {
       const hideTimer = setTimeout(() => {
         setShowTooltip(false);
         localStorage.setItem('witch-tooltip-shown', 'true');
-      }, 6000); // Hide for 5s, then mark as shown
+      }, 4000); // Hide after 3s, then mark as shown
       return () => {
         clearTimeout(timer);
         clearTimeout(hideTimer);
@@ -88,21 +88,21 @@ function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="hidden h-10 w-10 transition-transform duration-200 hover:scale-110 active:scale-95 md:flex"
+          className="hidden h-12 w-12 transition-transform duration-300 ease-in-out hover:scale-125 hover:text-primary active:scale-110 md:flex"
           onClick={toggleSidebar}
           aria-label="Toggle Sidebar"
         >
           {state === 'expanded' ? (
-            <GoSidebarExpand className="h-7 w-7" />
+            <GoSidebarExpand className="h-8 w-8" />
           ) : (
-            <GoSidebarCollapse className="h-7 w-7" />
+            <GoSidebarCollapse className="h-8 w-8" />
           )}
         </Button>
 
         {/* Tooltip for first-time users */}
         {showTooltip && !isMobile && (
-          <div className="absolute left-12 top-full z-10 mt-2 w-max animate-in fade-in-50 slide-in-from-top-2">
-            <div className="rounded-md bg-foreground px-3 py-1.5 text-sm font-medium text-background shadow-lg">
+          <div className="absolute left-14 top-full z-10 mt-2 w-max animate-in fade-in-50 slide-in-from-top-2">
+            <div className="animate-pulse rounded-md bg-foreground px-3 py-1.5 text-sm font-medium text-background shadow-lg">
               <p>Toggle features!</p>
             </div>
           </div>
