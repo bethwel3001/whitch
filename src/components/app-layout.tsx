@@ -45,6 +45,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { IoHardwareChip } from 'react-icons/io5';
 
 function AppHeader() {
   const { state } = useSidebar();
@@ -56,7 +57,7 @@ function AppHeader() {
           href="/"
           className="flex items-center gap-2 animate-in fade-in duration-300 no-underline text-foreground"
         >
-          <h1 className="text-xl font-headline font-semibold">w!tch</h1>
+          <IoHardwareChip className="h-8 w-8 text-primary" />
         </Link>
       )}
     </header>
@@ -111,6 +112,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             href="/"
             className="flex items-center gap-2 no-underline text-foreground"
           >
+            <IoHardwareChip className="h-8 w-8 text-primary" />
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
           </Link>
         </SidebarHeader>
