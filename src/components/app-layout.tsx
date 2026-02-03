@@ -47,20 +47,20 @@ import {
 } from '@/components/ui/alert-dialog';
 import { IoHardwareChip } from 'react-icons/io5';
 
-function AppHeader() {
+function AppHeaderContent() {
   const { state } = useSidebar();
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center justify-start gap-4 border-b bg-background/80 p-4 backdrop-blur-sm">
+    <div className="absolute left-4 top-4 z-10 flex items-center gap-4">
       <SidebarTrigger />
       {state === 'collapsed' && (
         <Link
           href="/"
-          className="flex items-center gap-2 animate-in fade-in duration-300 no-underline text-foreground"
+          className="flex animate-in fade-in duration-300 items-center gap-2 text-foreground no-underline"
         >
           <IoHardwareChip className="h-8 w-8 text-primary" />
         </Link>
       )}
-    </header>
+    </div>
   );
 }
 
@@ -116,7 +116,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
           </Link>
         </SidebarHeader>
-        <SidebarContent className="flex flex-col justify-between">
+        <SidebarContent className="flex flex-col justify-between overflow-x-hidden">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton isActive>
@@ -208,7 +208,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <AppHeader />
+        <AppHeaderContent />
         {children}
       </SidebarInset>
 
