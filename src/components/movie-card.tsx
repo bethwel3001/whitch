@@ -22,7 +22,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
 
   return (
     <Link href={href} className="group block h-full outline-none">
-      <Card className="flex h-full flex-col overflow-hidden border bg-card shadow transition-all duration-300 group-hover:border-primary group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
+      <Card className="flex h-full flex-col overflow-hidden transition-all duration-300 group-hover:border-primary group-hover:shadow-[0_0_20px_0px_hsl(var(--primary))] group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
         <CardHeader className="relative p-0">
           <Image
             src={movie.posterUrl}

@@ -104,7 +104,7 @@ export function MovieChat({ movie }: { movie: Movie }) {
   };
 
   return (
-    <div className="flex h-[80vh] w-full flex-col rounded-lg border bg-card shadow">
+    <div className="flex h-[80vh] w-full flex-col rounded-lg border bg-muted/20 shadow">
       <div className="border-b p-4">
         <h3 className="text-lg font-semibold">Chat with w!tch</h3>
         <p className="text-sm text-muted-foreground">
