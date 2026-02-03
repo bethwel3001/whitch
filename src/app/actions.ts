@@ -52,7 +52,7 @@ export async function getRecommendationsForMood(
           description: 'A new recommendation from w!tch AI.',
           posterUrl: `https://picsum.photos/seed/${rec.title
             .replace(/\s+/g, '')
-            .toLowerCase()}/400/600`,
+            .toLowerCase()}/400/500`,
           posterHint: 'movie poster',
           services: [],
           genre: 'Unknown',

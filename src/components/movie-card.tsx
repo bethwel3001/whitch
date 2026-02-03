@@ -28,11 +28,11 @@ export function MovieCard({ movie }: { movie: Movie }) {
             src={movie.posterUrl}
             alt={`Poster for ${movie.title}`}
             width={400}
-            height={600}
+            height={500}
             className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={movie.posterHint}
           />
-          <div className="absolute bottom-0 left-0 p-4">
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12">
             <h3 className="font-headline text-2xl font-bold text-white drop-shadow-md">
               {movie.title}
             </h3>
@@ -42,9 +42,11 @@ export function MovieCard({ movie }: { movie: Movie }) {
           </div>
         </CardHeader>
         <CardContent className="flex-grow space-y-2 p-4">
-          <p className="text-sm text-muted-foreground">{movie.description}</p>
+          <p className="text-sm text-muted-foreground line-clamp-3">
+            {movie.description}
+          </p>
           {movie.reason && (
-            <p className="border-l-2 border-primary pl-3 text-sm italic text-accent-foreground/80">
+            <p className="border-l-2 border-primary pl-3 text-sm italic text-accent-foreground/80 line-clamp-2">
               "{movie.reason}"
             </p>
           )}
