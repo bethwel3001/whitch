@@ -217,7 +217,7 @@ const Sidebar = React.forwardRef<
             }
             side={side}
           >
-            <SheetTitle className="sr-only">Sidebar Menu</SheetTitle>
+             <SheetTitle className="sr-only">Sidebar Menu</SheetTitle>
             <div className="flex h-full w-full flex-col">{children}</div>
           </SheetContent>
         </Sheet>
@@ -281,17 +281,17 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref}
       data-sidebar="trigger"
-      variant="outline"
+      variant="ghost"
       size="icon"
-      className={cn("h-10 w-10 border-2", className)}
+      className={cn("h-10 w-10 text-foreground/70 hover:bg-primary/10 hover:text-primary", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
       }}
       {...props}
     >
-      <ChevronLeft className={cn("h-6 w-6", state === 'collapsed' && 'hidden')} strokeWidth={2.5} />
-      <ChevronRight className={cn("h-6 w-6", state === 'expanded' && 'hidden')} strokeWidth={2.5} />
+      <ChevronLeft className={cn("h-6 w-6", state === 'collapsed' && 'hidden')} />
+      <ChevronRight className={cn("h-6 w-6", state === 'expanded' && 'hidden')} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
