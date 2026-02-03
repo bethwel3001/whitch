@@ -33,6 +33,7 @@ import {
   Bell,
   ChevronRight,
   LogIn,
+  PanelLeft,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
@@ -48,29 +49,39 @@ import {
 import { IoHardwareChip } from 'react-icons/io5';
 import { RecommendationsProvider } from '@/context/recommendations-context';
 
-function PageHeader() {
-  const { state, isMobile } = useSidebar();
+function Header() {
+  const { state, toggleSidebar, isMobile } = useSidebar();
 
-  // On desktop, hide header if sidebar is expanded.
-  // On mobile, the sidebar is an overlay, so the header should always be visible.
-  const isHeaderHidden = !isMobile && state === 'expanded';
+  // Show the header logo if it's mobile OR if it's desktop and the sidebar is collapsed
+  const showHeaderLogo = isMobile || (!isMobile && state === 'collapsed');
 
   return (
-    <div
-      className={cn(
-        'flex h-auto items-center gap-4',
-        isHeaderHidden ? 'hidden' : ''
-      )}
-    >
-      <SidebarTrigger className="md:hidden" />
-      <Link
-        href="/"
-        className="flex items-center gap-2 text-foreground no-underline"
-      >
-        <IoHardwareChip className="h-8 w-8 text-primary" />
-        <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-      </Link>
-    </div>
+    <header className="flex h-14 items-center border-b bg-background px-4">
+      <div className="flex items-center gap-4">
+        {/* Mobile-only hamburger trigger */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          onClick={toggleSidebar}
+          aria-label="Toggle Sidebar"
+        >
+          <PanelLeft className="h-6 w-6" />
+        </Button>
+
+        {/* Logo that appears in the header on mobile or when sidebar is collapsed */}
+        <Link
+          href="/"
+          className={cn(
+            'flex items-center gap-2 text-foreground no-underline',
+            !showHeaderLogo && 'hidden'
+          )}
+        >
+          <IoHardwareChip className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
+        </Link>
+      </div>
+    </header>
   );
 }
 
@@ -228,11 +239,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             </Button>
           </SidebarFooter>
         </Sidebar>
-        <SidebarInset>
-          <div className="space-y-12 px-4 pb-12 pt-8 md:px-6 md:pb-16 md:pt-10">
-            <PageHeader />
-            {children}
-          </div>
+        <SidebarInset className="flex flex-col">
+          <Header />
+          <main className="flex-1 overflow-y-auto">
+            <div className="space-y-12 px-4 pb-12 pt-8 md:px-6 md:pb-16 md:pt-10">
+              {children}
+            </div>
+          </main>
         </SidebarInset>
 
         <AlertDialog
