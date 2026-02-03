@@ -22,7 +22,6 @@ export type InitialRecommendationOutput = z.infer<
   typeof InitialRecommendationOutputSchema
 >;
 
-
 // from mood-based-recommendations.ts
 export const MoodBasedRecommendationsInputSchema = z.object({
   mood: z
@@ -42,6 +41,11 @@ const RecommendationSchema = z.object({
   type: z
     .enum(['Movie', 'Series', 'Anime'])
     .describe('The type of content.'),
+  services: z
+    .array(z.string())
+    .describe(
+      'A list of major streaming services where this content might be available (e.g., ["Netflix", "Hulu", "Max"]).'
+    ),
 });
 export const MoodBasedRecommendationsOutputSchema = z.object({
   recommendations: z

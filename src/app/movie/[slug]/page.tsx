@@ -65,16 +65,24 @@ export default function MovieDetailsPage({
             alt={`Poster for ${movie.title}`}
             width={400}
             height={400}
-            className="w-full rounded-lg object-cover shadow-lg"
+            className="aspect-square w-full rounded-lg object-cover shadow-lg"
             data-ai-hint={movie.posterHint}
           />
-          <div className="absolute bottom-0 left-0 w-full rounded-b-lg bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12 lg:hidden">
-            <h1 className="font-headline text-3xl font-bold text-white drop-shadow-md">
+          <div className="absolute bottom-0 left-0 w-full rounded-b-lg bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-24 lg:hidden">
+            <h1 className="font-headline text-2xl font-bold text-white drop-shadow-md">
               {movie.title}
             </h1>
             <p className="mt-1 text-lg text-white/80 drop-shadow-sm">
               {movie.year}
             </p>
+            {movie.reason && (
+              <blockquote className="mt-4 border-l-2 border-primary/70 pl-3 text-sm italic text-white/90">
+                "{movie.reason}"
+                <footer className="mt-1 text-right text-xs not-italic text-white/70">
+                  - w!tch's recommendation
+                </footer>
+              </blockquote>
+            )}
           </div>
         </div>
 
@@ -98,7 +106,7 @@ export default function MovieDetailsPage({
             {movie.description}
           </p>
           {movie.reason && (
-            <blockquote className="mt-6 rounded-r-md border-l-4 border-primary bg-muted/20 p-4 italic text-accent-foreground/90">
+            <blockquote className="mt-6 hidden rounded-r-md border-l-4 border-primary bg-muted/20 p-4 italic text-accent-foreground/90 lg:block">
               "{movie.reason}"
               <footer className="mt-2 text-sm not-italic">
                 - w!tch's recommendation

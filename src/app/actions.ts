@@ -36,7 +36,13 @@ export async function getRecommendationsForMood(
         const foundMovie = findMovieInPool(rec.title);
 
         if (foundMovie) {
-          return {...foundMovie, reason: rec.reason, type: rec.type};
+          // Add AI reason and type to existing pool movie
+          return {
+            ...foundMovie,
+            reason: rec.reason,
+            type: rec.type,
+            services: foundMovie.services || rec.services || [],
+          };
         }
 
         const slug = rec.title
@@ -54,7 +60,7 @@ export async function getRecommendationsForMood(
             .replace(/\s+/g, '')
             .toLowerCase()}/400/400`,
           posterHint: `${rec.type?.toLowerCase() || 'movie'} poster`,
-          services: [],
+          services: rec.services || [],
           genre: rec.type || 'Unknown',
           reason: rec.reason,
           type: rec.type,
