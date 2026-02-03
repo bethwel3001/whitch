@@ -27,7 +27,6 @@ import {
 import {
   Home,
   Settings,
-  Wand2,
   Sun,
   Moon,
   Laptop,
@@ -57,9 +56,6 @@ function AppHeader() {
           href="/"
           className="flex items-center gap-2 animate-in fade-in duration-300 no-underline text-foreground"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <Wand2 className="h-5 w-5 text-primary-foreground" />
-          </div>
           <h1 className="text-xl font-headline font-semibold">w!tch</h1>
         </Link>
       )}
@@ -115,9 +111,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             href="/"
             className="flex items-center gap-2 no-underline text-foreground"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <Wand2 className="h-6 w-6 text-primary-foreground" />
-            </div>
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
           </Link>
         </SidebarHeader>

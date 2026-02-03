@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { type Movie } from '@/lib/placeholder-data';
 import { getMovieChatResponse } from '@/app/actions';
-import { Send, Bot, User, Loader2 } from 'lucide-react';
+import { Send, User, Loader2 } from 'lucide-react';
 import { type MovieChatInput } from '@/ai/flows/types';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { cn } from '@/lib/utils';
@@ -117,11 +117,7 @@ export function MovieChatDialog({
                 )}
               >
                 {message.role === 'model' && (
-                  <Avatar className="w-8 h-8 bg-primary text-primary-foreground">
-                    <AvatarFallback>
-                      <Bot size={20}/>
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
                 )}
                 <div
                   className={cn(
@@ -144,11 +140,7 @@ export function MovieChatDialog({
             ))}
             {isLoading && (
               <div className="flex items-start gap-3 justify-start">
-                 <Avatar className="w-8 h-8 bg-primary text-primary-foreground">
-                    <AvatarFallback>
-                      <Bot size={20}/>
-                    </AvatarFallback>
-                  </Avatar>
+                 <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
                 <div className="bg-muted rounded-lg p-3">
                    <Loader2 className="h-5 w-5 animate-spin" />
                 </div>

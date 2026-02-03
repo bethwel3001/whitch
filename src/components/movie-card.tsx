@@ -22,7 +22,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
 
   return (
     <Link href={href} className="group block h-full outline-none">
-      <Card className="flex h-full flex-col overflow-hidden border border-border/20 bg-card shadow-md transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/10 group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
+      <Card className="flex h-full flex-col overflow-hidden border bg-card shadow transition-all duration-300 group-hover:border-primary group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background">
         <CardHeader className="relative p-0">
           <Image
             src={movie.posterUrl}
@@ -32,12 +32,11 @@ export function MovieCard({ movie }: { movie: Movie }) {
             className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={movie.posterHint}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
           <div className="absolute bottom-0 left-0 p-4">
-            <h3 className="font-headline text-2xl font-bold text-white drop-shadow-lg">
+            <h3 className="font-headline text-2xl font-bold text-white drop-shadow-md">
               {movie.title}
             </h3>
-            <p className="text-sm text-white/80 text-muted-foreground">
+            <p className="text-sm text-white/80 drop-shadow-sm">
               {movie.year}
             </p>
           </div>

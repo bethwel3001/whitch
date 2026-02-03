@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { type Movie } from '@/lib/placeholder-data';
 import { getMovieChatResponse } from '@/app/actions';
-import { Send, Bot, User, Loader2, Wand2 } from 'lucide-react';
+import { Send, User, Loader2 } from 'lucide-react';
 import { type MovieChatInput } from '@/ai/flows/types';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { cn } from '@/lib/utils';
@@ -103,11 +103,9 @@ export function MovieChat({ movie }: { movie: Movie }) {
   };
 
   return (
-    <div className="flex h-[80vh] w-full flex-col rounded-xl border bg-card shadow-lg">
+    <div className="flex h-[80vh] w-full flex-col rounded-lg border bg-card shadow">
       <div className="flex items-center gap-3 border-b p-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-          <Wand2 className="h-6 w-6 text-primary-foreground" />
-        </div>
+        <div className="h-10 w-10 flex-shrink-0 rounded-full bg-primary" />
         <div>
           <h3 className="text-lg font-semibold">Chat with w!tch</h3>
           <p className="text-sm text-muted-foreground">
@@ -127,11 +125,7 @@ export function MovieChat({ movie }: { movie: Movie }) {
               )}
             >
               {message.role === 'model' && (
-                <Avatar className="h-8 w-8 border bg-primary text-primary-foreground">
-                  <AvatarFallback className="bg-primary">
-                    <Bot size={18} />
-                  </AvatarFallback>
-                </Avatar>
+                 <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
               )}
               <div
                 className={cn(
@@ -154,11 +148,7 @@ export function MovieChat({ movie }: { movie: Movie }) {
           ))}
           {isLoading && (
             <div className="flex items-start gap-3 justify-start">
-              <Avatar className="h-8 w-8 border bg-primary text-primary-foreground">
-                <AvatarFallback className="bg-primary">
-                  <Bot size={18} />
-                </AvatarFallback>
-              </Avatar>
+               <div className="h-8 w-8 flex-shrink-0 rounded-full bg-primary" />
               <div className="bg-muted rounded-lg p-3">
                 <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
               </div>

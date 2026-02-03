@@ -63,7 +63,7 @@ export default function MovieDetailsPage({
               alt={`Poster for ${movie.title}`}
               width={400}
               height={600}
-              className="mx-auto w-full max-w-sm rounded-xl object-cover shadow-2xl"
+              className="mx-auto w-full max-w-sm rounded-lg object-cover shadow-lg"
               data-ai-hint={movie.posterHint}
             />
             <div className="mx-auto mt-6 max-w-sm space-y-2">
@@ -83,7 +83,7 @@ export default function MovieDetailsPage({
                 {movie.description}
               </p>
               {movie.reason && (
-                <blockquote className="rounded-r-lg border-l-4 border-primary bg-muted/30 p-4 italic text-accent-foreground/90">
+                <blockquote className="rounded-r-md border-l-4 border-primary bg-muted/30 p-4 italic text-accent-foreground/90">
                   "{movie.reason}"
                   <footer className="mt-2 text-sm not-italic">
                     - w!tch's recommendation
