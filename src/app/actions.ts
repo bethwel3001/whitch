@@ -36,7 +36,7 @@ export async function getRecommendationsForMood(
         const foundMovie = findMovieInPool(rec.title);
 
         if (foundMovie) {
-          return {...foundMovie, reason: rec.reason};
+          return {...foundMovie, reason: rec.reason, type: rec.type};
         }
 
         const slug = rec.title
@@ -53,13 +53,14 @@ export async function getRecommendationsForMood(
           posterUrl: `https://picsum.photos/seed/${rec.title
             .replace(/\s+/g, '')
             .toLowerCase()}/400/400`,
-          posterHint: 'movie poster',
+          posterHint: `${rec.type?.toLowerCase() || 'movie'} poster`,
           services: [],
-          genre: 'Unknown',
+          genre: rec.type || 'Unknown',
           reason: rec.reason,
+          type: rec.type,
         };
       })
-      .slice(0, 8); // Limit to 8 movies for display
+      .slice(0, 6); // Limit to 6 movies for display
 
     return {success: true, movies: recommendedMovies};
   } catch (error) {

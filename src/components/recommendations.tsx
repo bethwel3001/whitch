@@ -118,7 +118,7 @@ export function Recommendations() {
           )}
 
           {!isLoading && !error && displayedMovies.length > 0 && (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-8">
               {displayedMovies.map((movie, index) => (
                 <MovieCard key={`${movie.slug}-${index}`} movie={movie} />
               ))}

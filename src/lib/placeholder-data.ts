@@ -17,6 +17,7 @@ export type Movie = {
   services: string[];
   genre: string;
   reason?: string;
+  type?: 'Movie' | 'Series' | 'Anime';
 };
 
 export const moviePool: Movie[] = [
@@ -30,6 +31,7 @@ export const moviePool: Movie[] = [
     posterHint: 'cityscape architecture',
     services: ['Netflix', 'Max'],
     genre: 'Sci-Fi',
+    type: 'Movie',
   },
   {
     title: 'Interstellar',
@@ -41,6 +43,7 @@ export const moviePool: Movie[] = [
     posterHint: 'space stars',
     services: ['Amazon Prime'],
     genre: 'Sci-Fi',
+    type: 'Movie',
   },
   {
     title: 'Blade Runner 2049',
@@ -52,6 +55,7 @@ export const moviePool: Movie[] = [
     posterHint: 'futuristic city',
     services: ['Netflix'],
     genre: 'Sci-Fi',
+    type: 'Movie',
   },
   {
     title: 'The Matrix',
@@ -63,6 +67,7 @@ export const moviePool: Movie[] = [
     posterHint: 'digital code',
     services: ['Max'],
     genre: 'Sci-Fi',
+    type: 'Movie',
   },
   {
     title: 'The Grand Budapest Hotel',
@@ -74,6 +79,7 @@ export const moviePool: Movie[] = [
     posterHint: 'vintage hotel',
     services: ['Disney+'],
     genre: 'Comedy',
+    type: 'Movie',
   },
   {
     title: 'Booksmart',
@@ -85,6 +91,7 @@ export const moviePool: Movie[] = [
     posterHint: 'graduation party',
     services: ['Hulu'],
     genre: 'Comedy',
+    type: 'Movie',
   },
   {
     title: 'Parasite',
@@ -96,6 +103,7 @@ export const moviePool: Movie[] = [
     posterHint: 'modern house',
     services: ['Hulu'],
     genre: 'Drama',
+    type: 'Movie',
   },
   {
     title: 'Mad Max: Fury Road',
@@ -107,6 +115,7 @@ export const moviePool: Movie[] = [
     posterHint: 'desert car',
     services: ['Max'],
     genre: 'Action',
+    type: 'Movie',
   },
   {
     title: 'Paddington 2',
@@ -118,6 +127,7 @@ export const moviePool: Movie[] = [
     posterHint: 'cute bear',
     services: ['Netflix'],
     genre: 'Family',
+    type: 'Movie',
   },
   {
     title: 'School of Rock',
@@ -129,6 +139,7 @@ export const moviePool: Movie[] = [
     posterHint: 'electric guitar',
     services: ['Amazon Prime'],
     genre: 'Comedy',
+    type: 'Movie',
   },
   {
     title: 'A Quiet Place',
@@ -140,6 +151,7 @@ export const moviePool: Movie[] = [
     posterHint: 'dark forest',
     services: ['Amazon Prime'],
     genre: 'Thriller',
+    type: 'Movie',
   },
   {
     title: 'Get Out',
@@ -151,5 +163,6 @@ export const moviePool: Movie[] = [
     posterHint: 'eerie face',
     services: ['Netflix'],
     genre: 'Thriller',
+    type: 'Movie',
   },
 ];

@@ -39,6 +39,9 @@ const RecommendationSchema = z.object({
   title: z.string().describe('The title of the movie or show.'),
   year: z.number().optional().describe('The release year of the movie or show.'),
   reason: z.string().describe('A brief explanation for the recommendation.'),
+  type: z
+    .enum(['Movie', 'Series', 'Anime'])
+    .describe('The type of content.'),
 });
 export const MoodBasedRecommendationsOutputSchema = z.object({
   recommendations: z

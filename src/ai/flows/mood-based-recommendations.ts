@@ -24,7 +24,9 @@ const moodBasedRecommendationsPrompt = ai.definePrompt({
   name: 'moodBasedRecommendationsPrompt',
   input: {schema: MoodBasedRecommendationsInputSchema},
   output: {schema: MoodBasedRecommendationsOutputSchema},
-  prompt: `You are a movie recommendation expert. Given a user's current mood and past viewing history, you will provide a list of movie or show recommendations. Provide a title, year, and a brief reason for each recommendation.
+  prompt: `You are a movie, series, and anime recommendation expert. Given a user's current mood and past viewing history, you will provide a list of exactly 6 recommendations: 2 movies, 2 series, and 2 anime/animations/cartoons.
+
+For each recommendation, provide the title, year, a brief reason why it fits the user's mood, and its type ('Movie', 'Series', or 'Anime').
 
 Mood: {{{mood}}}
 Past Viewing History: {{{pastViewingHistory}}}
