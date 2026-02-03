@@ -28,7 +28,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
             src={movie.posterUrl}
             alt={`Poster for ${movie.title}`}
             width={400}
-            height={500}
+            height={400}
             className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={movie.posterHint}
           />

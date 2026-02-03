@@ -57,25 +57,35 @@ export default function MovieDetailsPage({
       </div>
 
       {/* Top section for details */}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
         {/* Image Column */}
-        <div className="md:col-span-1">
+        <div className="relative w-full lg:col-span-1">
           <Image
             src={movie.posterUrl}
             alt={`Poster for ${movie.title}`}
             width={400}
-            height={500}
+            height={400}
             className="w-full rounded-lg object-cover shadow-lg"
             data-ai-hint={movie.posterHint}
           />
+          <div className="absolute bottom-0 left-0 w-full rounded-b-lg bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12 lg:hidden">
+            <h1 className="font-headline text-3xl font-bold text-white drop-shadow-md">
+              {movie.title}
+            </h1>
+            <p className="mt-1 text-lg text-white/80 drop-shadow-sm">
+              {movie.year}
+            </p>
+          </div>
         </div>
 
         {/* Info Column */}
-        <div className="flex flex-col justify-center md:col-span-2">
-          <h1 className="font-headline text-3xl font-bold md:text-5xl">
-            {movie.title}
-          </h1>
-          <p className="mt-2 text-lg text-muted-foreground">{movie.year}</p>
+        <div className="flex flex-col justify-center lg:col-span-2">
+          <div className="hidden lg:block">
+            <h1 className="font-headline text-3xl font-bold md:text-4xl">
+              {movie.title}
+            </h1>
+            <p className="mt-2 text-lg text-muted-foreground">{movie.year}</p>
+          </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {(movie.services || []).map(service => (
               <Badge key={service} variant="secondary">

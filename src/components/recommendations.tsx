@@ -79,7 +79,7 @@ export function Recommendations() {
   );
 
   return (
-    <div className="mt-8 space-y-12 md:space-y-16">
+    <div className="space-y-12 md:space-y-16">
       <div className="space-y-4 text-center">
         <h2 className="text-3xl font-headline font-bold sm:text-4xl">
           How are you feeling today?
@@ -111,12 +111,12 @@ export function Recommendations() {
           ref={resultsRef}
           className="animate-in fade-in duration-500 space-y-6 scroll-mt-20"
         >
-          <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            <h3 className="flex flex-shrink-0 items-center gap-2 text-2xl font-headline font-semibold">
+          <div className="flex flex-col items-center gap-4">
+            <h3 className="flex items-center gap-2 text-2xl font-headline font-semibold">
               <Sparkles className="text-primary" />
               {selectedMood && `For your ${selectedMood.toLowerCase()} mood...`}
             </h3>
-            <div className="flex-1 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border bg-card p-3">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-lg border bg-card p-3">
               <span className="text-sm font-semibold">Filter by Service:</span>
               {streamingServices.map(service => (
                 <div key={service} className="flex items-center space-x-2">
