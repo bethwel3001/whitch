@@ -51,37 +51,62 @@ import { GoSidebarCollapse, GoSidebarExpand } from 'react-icons/go';
 
 function Header() {
   const { state, toggleSidebar, isMobile } = useSidebar();
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
+  React.useEffect(() => {
+    const tooltipShown = localStorage.getItem('witch-tooltip-shown');
+    if (!tooltipShown) {
+      const timer = setTimeout(() => setShowTooltip(true), 1000); // Show after 1s
+      const hideTimer = setTimeout(() => {
+        setShowTooltip(false);
+        localStorage.setItem('witch-tooltip-shown', 'true');
+      }, 6000); // Hide for 5s, then mark as shown
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(hideTimer);
+      };
+    }
+  }, []);
 
   const showHeaderLogo = isMobile || state === 'collapsed';
 
   return (
     <header className="flex h-14 items-center border-b bg-background px-4">
-      <div className="flex items-center gap-2 md:gap-4">
+      <div className="relative flex items-center gap-2 md:gap-4">
         {/* Mobile-only hamburger trigger */}
         <Button
           variant="ghost"
           size="icon"
-          className="transition-transform duration-200 hover:scale-110 md:hidden"
+          className="transition-transform duration-200 hover:scale-110 active:scale-95 md:hidden"
           onClick={toggleSidebar}
           aria-label="Toggle Sidebar"
         >
-          <PanelLeft className="h-6 w-6" />
+          <PanelLeft className="h-7 w-7" />
         </Button>
 
         {/* Desktop sidebar toggle */}
         <Button
           variant="ghost"
           size="icon"
-          className="hidden h-9 w-9 transition-transform duration-200 hover:scale-110 md:flex"
+          className="hidden h-10 w-10 transition-transform duration-200 hover:scale-110 active:scale-95 md:flex"
           onClick={toggleSidebar}
           aria-label="Toggle Sidebar"
         >
           {state === 'expanded' ? (
-            <GoSidebarExpand className="h-6 w-6" />
+            <GoSidebarExpand className="h-7 w-7" />
           ) : (
-            <GoSidebarCollapse className="h-6 w-6" />
+            <GoSidebarCollapse className="h-7 w-7" />
           )}
         </Button>
+
+        {/* Tooltip for first-time users */}
+        {showTooltip && !isMobile && (
+          <div className="absolute left-12 top-full z-10 mt-2 w-max animate-in fade-in-50 slide-in-from-top-2">
+            <div className="rounded-md bg-foreground px-3 py-1.5 text-sm font-medium text-background shadow-lg">
+              <p>Toggle features!</p>
+            </div>
+          </div>
+        )}
 
         {/* Logo that appears in the header on mobile or when sidebar is collapsed */}
         <Link
