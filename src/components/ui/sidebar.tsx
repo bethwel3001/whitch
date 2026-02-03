@@ -290,8 +290,8 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <ChevronLeft className={cn("h-6 w-6", state === 'collapsed' && 'hidden')} />
-      <ChevronRight className={cn("h-6 w-6", state === 'expanded' && 'hidden')} />
+      <ChevronLeft className={cn("h-6 w-6", state === 'collapsed' && 'hidden')} strokeWidth={2.5} />
+      <ChevronRight className={cn("h-6 w-6", state === 'expanded' && 'hidden')} strokeWidth={2.5} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
@@ -371,7 +371,7 @@ const SidebarHeader = React.forwardRef<
     <div
       ref={ref}
       data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-2", className)}
+      className={cn("flex flex-col gap-2", className)}
       {...props}
     />
   )

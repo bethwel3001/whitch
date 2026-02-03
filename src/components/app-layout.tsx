@@ -62,7 +62,7 @@ function PageHeader() {
         isHeaderHidden ? 'hidden' : ''
       )}
     >
-      <SidebarTrigger />
+      <SidebarTrigger className="md:hidden" />
       <Link
         href="/"
         className="flex items-center gap-2 text-foreground no-underline"
@@ -119,15 +119,20 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <RecommendationsProvider>
         <Sidebar>
           <SidebarHeader>
-            <Link
-              href="/"
-              className="flex items-center gap-2 p-2 text-foreground no-underline"
-            >
-              <IoHardwareChip className="h-8 w-8 text-primary" />
-              <div className="duration-200 group-data-[collapsible=icon]:-ml-8 group-data-[collapsible=icon]:opacity-0">
-                <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
-              </div>
-            </Link>
+            <div className="flex w-full items-center justify-between p-2">
+              <Link
+                href="/"
+                className="flex items-center gap-2 text-foreground no-underline"
+              >
+                <IoHardwareChip className="h-8 w-8 text-primary" />
+                <div className="duration-200 group-data-[collapsible=icon]:-ml-8 group-data-[collapsible=icon]:opacity-0">
+                  <h1 className="text-2xl font-headline font-semibold">
+                    w!tch
+                  </h1>
+                </div>
+              </Link>
+              <SidebarTrigger className="hidden md:flex" />
+            </div>
           </SidebarHeader>
           <SidebarContent className="flex flex-col justify-between overflow-x-hidden">
             <SidebarMenu>
