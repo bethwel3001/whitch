@@ -10,12 +10,12 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarInset,
   SidebarFooter,
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
   useSidebar,
+  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
@@ -52,36 +52,35 @@ import { GoSidebarCollapse, GoSidebarExpand } from 'react-icons/go';
 function Header() {
   const { state, toggleSidebar, isMobile } = useSidebar();
 
-  // Show the header logo if it's mobile OR if it's desktop and the sidebar is collapsed
-  const showHeaderLogo = isMobile || (!isMobile && state === 'collapsed');
+  const showHeaderLogo = isMobile || state === 'collapsed';
 
   return (
     <header className="flex h-14 items-center border-b bg-background px-4">
-      <div className="flex items-center gap-4">
-        {/* Desktop sidebar toggle */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="hidden h-8 w-8 md:flex"
-          onClick={toggleSidebar}
-          aria-label="Toggle Sidebar"
-        >
-          {state === 'expanded' ? (
-            <GoSidebarExpand className="h-5 w-5" />
-          ) : (
-            <GoSidebarCollapse className="h-5 w-5" />
-          )}
-        </Button>
-
+      <div className="flex items-center gap-2 md:gap-4">
         {/* Mobile-only hamburger trigger */}
         <Button
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="transition-transform duration-200 hover:scale-110 md:hidden"
           onClick={toggleSidebar}
           aria-label="Toggle Sidebar"
         >
           <PanelLeft className="h-6 w-6" />
+        </Button>
+
+        {/* Desktop sidebar toggle */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="hidden h-9 w-9 transition-transform duration-200 hover:scale-110 md:flex"
+          onClick={toggleSidebar}
+          aria-label="Toggle Sidebar"
+        >
+          {state === 'expanded' ? (
+            <GoSidebarExpand className="h-6 w-6" />
+          ) : (
+            <GoSidebarCollapse className="h-6 w-6" />
+          )}
         </Button>
 
         {/* Logo that appears in the header on mobile or when sidebar is collapsed */}
