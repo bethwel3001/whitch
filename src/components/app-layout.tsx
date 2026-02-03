@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
+  useSidebar,
 } from '@/components/ui/sidebar';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import {
@@ -48,8 +49,19 @@ import { IoHardwareChip } from 'react-icons/io5';
 import { RecommendationsProvider } from '@/context/recommendations-context';
 
 function PageHeader() {
+  const { state, isMobile } = useSidebar();
+
+  // On desktop, hide header if sidebar is expanded.
+  // On mobile, the sidebar is an overlay, so the header should always be visible.
+  const isHeaderHidden = !isMobile && state === 'expanded';
+
   return (
-    <div className="flex h-auto items-center gap-4">
+    <div
+      className={cn(
+        'flex h-auto items-center gap-4',
+        isHeaderHidden ? 'hidden' : ''
+      )}
+    >
       <SidebarTrigger />
       <Link
         href="/"
