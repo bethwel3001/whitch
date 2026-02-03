@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -50,7 +51,7 @@ import { IoHardwareChip } from 'react-icons/io5';
 function PageHeader() {
   const { state } = useSidebar();
   return (
-    <div className="flex h-auto items-center gap-4 px-4 pt-6 md:px-6 md:pt-8">
+    <div className="flex h-auto items-center gap-4">
       <SidebarTrigger />
       {state === 'collapsed' && (
         <Link
@@ -111,7 +112,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         <SidebarHeader>
           <Link
             href="/"
-            className="flex items-center gap-2 no-underline text-foreground"
+            className="flex items-center gap-2 text-foreground no-underline"
           >
             <IoHardwareChip className="h-8 w-8 text-primary" />
             <h1 className="text-2xl font-headline font-semibold">w!tch</h1>
@@ -209,8 +210,10 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <PageHeader />
-        <div className="px-4 pb-4 md:px-6 md:pb-8">{children}</div>
+        <div className="px-4 pt-6 md:px-6 md:pt-8">
+          <PageHeader />
+          {children}
+        </div>
       </SidebarInset>
 
       <AlertDialog open={isAuthDialogOpen} onOpenChange={setIsAuthDialogOpen}>

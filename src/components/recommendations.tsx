@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef } from 'react';
@@ -78,7 +79,7 @@ export function Recommendations() {
   );
 
   return (
-    <div className="mt-8 space-y-8 md:mt-12">
+    <div className="mt-8 space-y-12 md:space-y-16">
       <div className="space-y-4 text-center">
         <h2 className="text-3xl font-headline font-bold sm:text-4xl">
           How are you feeling today?
