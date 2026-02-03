@@ -1,44 +1,28 @@
-import { MovieChat } from '@/components/movie-chat';
+'use client';
+
+import { useRecommendationsContext } from '@/context/recommendations-context';
 import { moviePool, type Movie } from '@/lib/placeholder-data';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Buffer } from 'buffer';
+import { MovieChat } from '@/components/movie-chat';
 
 function findMovieBySlug(slug: string): Movie | undefined {
   return moviePool.find(movie => movie.slug === slug);
 }
 
-// Generate static paths for all movies for performance
-export async function generateStaticParams() {
-  return moviePool.map(movie => ({
-    slug: movie.slug,
-  }));
-}
+export default function MovieDetailsPage() {
+  const params = useParams();
+  const { recommendations } = useRecommendationsContext();
+  const slug = params.slug as string;
 
-export default function MovieDetailsPage({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  let movie: Movie | undefined = findMovieBySlug(params.slug);
+  let movie: Movie | undefined = recommendations.find(m => m.slug === slug);
 
-  if (!movie && searchParams?.data) {
-    try {
-      const movieData = Buffer.from(
-        searchParams.data as string,
-        'base64'
-      ).toString('utf-8');
-      movie = JSON.parse(movieData);
-    } catch (e) {
-      console.error('Failed to parse movie data from search params', e);
-      // Let it fall through to notFound()
-    }
+  if (!movie) {
+    movie = findMovieBySlug(slug);
   }
 
   if (!movie) {

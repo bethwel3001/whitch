@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🔮 w!tch</h1>
+  <h1>w!tch</h1>
   <p><strong>Your AI-Powered Movie & Show Oracle</strong></p>
   <p>Discover your next favorite movie, series, or anime based on your mood, and chat with an AI expert about any title.</p>
 </div>
@@ -14,23 +14,23 @@
 
 **w!tch** is a modern, AI-driven recommendation app that helps you find the perfect movie, series, or anime to match your current vibe. No more endless scrolling—just select your mood and let our AI conjure the perfect watchlist for you.
 
-## ✨ Key Features
+## Key Features
 
--   🔮 **Mood-Based Recommendations**: Get a curated list of 2 movies, 2 series, and 2 anime tailored to how you're feeling.
--   🤖 **AI Movie Expert Chat**: Dive deep into any movie. Ask about plot points, trivia, actors, or behind-the-scenes secrets.
--   🎬 **Balanced Suggestions**: The AI ensures a diverse mix of content types in every recommendation.
--   🎨 **Sleek, Modern UI**: A minimalist, responsive design with a glowing, futuristic aesthetic built with ShadCN UI and Tailwind CSS.
--   ⚡️ **Dynamic & Interactive**: Smooth animations and a persistent recommendation state provide a seamless user experience.
--   🌓 **Light & Dark Mode**: Beautifully crafted themes that adapt to your system preference.
+-   **Mood-Based Recommendations**: Get a curated list of 2 movies, 2 series, and 2 anime tailored to how you're feeling.
+-   **AI Movie Expert Chat**: Dive deep into any movie. Ask about plot points, trivia, actors, or behind-the-scenes secrets.
+-   **Balanced Suggestions**: The AI ensures a diverse mix of content types in every recommendation.
+-   **Sleek, Modern UI**: A minimalist, responsive design with a glowing, futuristic aesthetic built with ShadCN UI and Tailwind CSS.
+-   **Dynamic & Interactive**: Smooth animations and a persistent recommendation state provide a seamless user experience.
+-   **Light & Dark Mode**: Beautifully crafted themes that adapt to your system preference.
 
-## 🚀 How It Works
+## How It Works
 
 1.  **Select Your Mood**: Choose from a list of moods like "Happy," "Sad," "Thrilled," etc.
 2.  **Get AI Recommendations**: The app sends your mood to a backend powered by **Genkit**, which uses a generative AI model to create a unique list of recommendations.
 3.  **Filter & Explore**: Filter the results by streaming service to see what's available to you.
 4.  **Chat with w!tch**: Click on any title to view details and open a chat with our AI movie expert to learn more.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 -   **Framework**: [Next.js](https://nextjs.org/) (App Router)
 -   **UI Library**: [React](https://react.dev/)
@@ -39,7 +39,7 @@
 -   **Generative AI**: [Firebase Genkit](https://firebase.google.com/docs/genkit) with Google's Gemini models.
 -   **Icons**: [Lucide React](https://lucide.dev/guide/packages/lucide-react) & [React Icons](https://react-icons.github.io/react-icons/)
 
-## ⚙️ Getting Started
+## Getting Started
 
 Follow these steps to get the application running on your local machine.
 
@@ -96,7 +96,7 @@ npm run dev
 
 Open [http://localhost:9002](http://localhost:9002) in your browser to see the application live.
 
-## 📜 Available Scripts
+## Available Scripts
 
 -   `npm run dev`: Starts the Next.js development server.
 -   `npm run genkit:dev`: Starts the Genkit server once.
@@ -105,7 +105,7 @@ Open [http://localhost:9002](http://localhost:9002) in your browser to see the a
 -   `npm run start`: Starts the production server.
 -   `npm run lint`: Lints the codebase.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -117,11 +117,11 @@ Contributions are what make the open-source community such an amazing place to l
 
 Please make sure your code adheres to the project's coding standards and includes tests where applicable.
 
-## 📄 License
+## License
 
 This project is distributed under the MIT License.
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 -   Inspired by the creativity of the film community.
 -   Built with incredible open-source tools.

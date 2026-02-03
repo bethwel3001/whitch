@@ -7,18 +7,10 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { moviePool, type Movie } from '@/lib/placeholder-data';
-import { Buffer } from 'buffer';
+import { type Movie } from '@/lib/placeholder-data';
 
 export function MovieCard({ movie }: { movie: Movie }) {
-  const isFromPool = moviePool.some(poolMovie => poolMovie.slug === movie.slug);
-
-  let href = `/movie/${movie.slug}`;
-
-  if (!isFromPool) {
-    const movieData = Buffer.from(JSON.stringify(movie)).toString('base64');
-    href = `/movie/${movie.slug}?data=${movieData}`;
-  }
+  const href = `/movie/${movie.slug}`;
 
   return (
     <Link href={href} className="group block h-full outline-none">

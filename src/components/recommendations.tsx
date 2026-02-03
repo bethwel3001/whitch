@@ -72,7 +72,7 @@ export function Recommendations() {
         </div>
       </div>
 
-      {(isLoading || recommendations.length > 0 || error) && (
+      {selectedMood && (
         <section
           ref={resultsRef}
           className="animate-in fade-in-50 duration-500 space-y-6 scroll-mt-20"
@@ -80,7 +80,7 @@ export function Recommendations() {
           <div className="flex flex-col items-center gap-4 text-center">
             <h3 className="flex items-center gap-2 text-2xl font-headline font-semibold">
               <Sparkles className="text-primary" />
-              {selectedMood && `For your ${selectedMood.toLowerCase()} mood...`}
+              {`For your ${selectedMood.toLowerCase()} mood...`}
             </h3>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-lg border bg-card p-3">
               <span className="text-sm font-semibold">Filter by Service:</span>
@@ -141,7 +141,7 @@ export function Recommendations() {
         </section>
       )}
 
-      {!isLoading && recommendations.length === 0 && !error && (
+      {!selectedMood && !isLoading && (
         <div className="animate-in fade-in-50 duration-500 rounded-lg border-2 border-dashed border-muted py-24 text-center">
           <h3 className="text-xl font-semibold text-muted-foreground">
             Your movie journey starts here
